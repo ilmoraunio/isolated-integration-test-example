@@ -1,0 +1,9 @@
+dependencies:
+  pre:
+    - createdb isolated-integration-test
+    - createuser isolated-integration-test
+    - echo '{:profiles/dev {:env {:connection-uri "jdbc:postgresql://localhost/isolated-integration-test?user=isolated-integration-test&password=isolated-integration-test" :jws-shared-secret "secret"}}}' > profiles.clj
+test:
+  override:
+    - lein midje
+    - lein uberjar
