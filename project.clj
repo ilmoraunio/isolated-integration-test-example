@@ -1,6 +1,6 @@
 (defproject isolated-integration-test "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
-  :dependencies [[org.clojure/clojure "1.7.0"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  [clj-time "0.9.0"] ; required due to bug in lein-ring
                  [metosin/compojure-api "1.1.10" :exclusions [clj-time metosin/ring-http-response cheshire joda-time ring/ring-core com.fasterxml.jackson.dataformat/jackson-dataformat-smile ring/ring-codec commons-codec commons-io]]
                  [metosin/ring-http-response "0.6.5"]
