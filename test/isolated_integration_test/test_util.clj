@@ -24,7 +24,7 @@
 (defmacro without-fk-constraints [tx & body]
   `(do
     (jdbc/execute! ~tx ["SET session_replication_role = replica"])
-    (let [result# (do ~@body)]
+    (let [result# ~@body]
       (jdbc/execute! ~tx ["SET session_replication_role = DEFAULT"])
       result#)))
 
