@@ -4,12 +4,8 @@
                                               get-table-names-without-meta]]
             [isolated-integration-test.conf.config :refer [db-spec]]
             [isolated-integration-test.conf.migrations :as migrations]
-            [cheshire.core :as cheshire]
-            [buddy.sign.jws :as jws]
-            [clj-time.core :as t]
             [environ.core :refer [env]]
-            [clojure.java.jdbc :as jdbc]
-            [ring.mock.request :as mock]))
+            [clojure.java.jdbc :as jdbc]))
 
 (defn- empty-all-tables [conn]
   (if-let [table-name-count (count (get-table-names-without-meta))]

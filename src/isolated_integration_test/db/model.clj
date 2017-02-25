@@ -1,4 +1,3 @@
-(ns isolated-integration-test.db.model
-  (require [schema.core :as s]))
+(ns isolated-integration-test.db.model)
 
 (def Model {:id String})
