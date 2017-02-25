@@ -7,10 +7,9 @@
             [isolated-integration-test.test-util :refer [empty-and-create-tables]]
             [clojure.java.jdbc :as jdbc]))
 
-(def room-data {:name "Pigeon room"})
-
+(def room-data {:name "Some room name"})
 (def room-expected (contains {:id string?}
-                             {:name "Pigeon room"}))
+                             {:name "Some room name"}))
 
 (defn room
   ([] (let [data room-data] (room db-spec data)))

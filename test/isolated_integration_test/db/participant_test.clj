@@ -15,11 +15,6 @@
     :name name
     :username username}))
 
-(def participant-expected (contains {:id string?}
-                                    {:room_id string?}
-                                    {:name "Room group"}
-                                    {:username "foobar"}))
-
 (defn participant
   ([] (participant db-spec participant-data))
   ([tx input] (model/create! tx (participant-data input))))
@@ -30,4 +25,7 @@
       (fact "Succeeds"
         (jdbc/with-db-transaction [tx db-spec]
           (without-fk-constraints tx
-            (participant tx {:room_id "foobar"}) => participant-expected))))))
+            (participant tx {:room_id "foobar"}) => (contains {:id string?}
+                                                              {:room_id string?}
+                                                              {:name "Room group"}
+                                                              {:username "foobar"})))))))
