@@ -21,10 +21,10 @@
                                     {:username "foobar"}))
 
 (defn participant
-  ([input] (participant db-spec input))
+  ([] (participant db-spec participant-data))
   ([tx input] (model/create! tx (participant-data input))))
 
-(deftest participant-test
+(deftest participant-db
   (facts "Participant insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact
