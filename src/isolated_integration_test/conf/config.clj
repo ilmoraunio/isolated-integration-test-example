@@ -1,8 +1,6 @@
 (ns isolated-integration-test.conf.config
   (:require [yesql.core :refer [defquery]]
-            [environ.core :refer [env]]
-            [isolated-integration-test.conf.migrations :as migrations]
-            [clojure.java.jdbc :as jdbc]))
+            [environ.core :refer [env]]))
 
 (def db-spec 
   {:connection-uri (env :connection-uri)})

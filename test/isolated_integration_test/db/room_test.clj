@@ -2,7 +2,6 @@
   (:require [clojure.test :refer [deftest]]
             [midje.sweet :refer :all]
             [isolated-integration-test.db.room :as model]
-            [schema.core :as s]
             [isolated-integration-test.conf.config :refer [db-spec]]
             [isolated-integration-test.test-util :refer [empty-and-create-tables]]
             [clojure.java.jdbc :as jdbc]))

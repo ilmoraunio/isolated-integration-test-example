@@ -5,7 +5,6 @@
             [isolated-integration-test.db.room-test :refer [room]]
             [isolated-integration-test.db.participant-test :refer [participant]]
             [isolated-integration-test.db.message :as model]
-            [schema.core :as s]
             [isolated-integration-test.conf.config :refer [db-spec]]
             [isolated-integration-test.test-util :refer [empty-and-create-tables
                                                          without-fk-constraints]]

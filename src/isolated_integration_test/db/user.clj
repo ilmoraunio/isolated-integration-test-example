@@ -1,8 +1,7 @@
 (ns isolated-integration-test.db.user
   (:require [schema.core :as s]
             [yesql.core :refer [defquery]]
-            [isolated-integration-test.conf.config :refer [db-spec]]
-            [isolated-integration-test.db.model :as model]))
+            [isolated-integration-test.conf.config :refer [db-spec]]))
 
 (s/defschema New {:username String
                   :password String})

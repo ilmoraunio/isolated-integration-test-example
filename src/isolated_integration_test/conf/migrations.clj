@@ -1,6 +1,5 @@
 (ns isolated-integration-test.conf.migrations
   (:require [ragtime.jdbc :as jdbc]
-            [ragtime.core :as core]
             [environ.core :refer [env]]
             [ragtime.repl :as repl]))
 

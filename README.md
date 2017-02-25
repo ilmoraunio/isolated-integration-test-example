@@ -8,7 +8,7 @@ Run tests with:
 
 `lein midje`
 
-Examples can be found under `src/tests` directory.
+Isolated integration test can be found inside `test/isolated_integration_test/db/message_test.clj`
 
 Prerequisites:
 
