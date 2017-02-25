@@ -10,7 +10,7 @@
 
 (defn participant-data
   ([{:keys [room_id name username]
-     :or {name "Room group" username "foobar"}}]
+     :or {name "Foobar-participant" username "foobar"}}]
    {:room_id room_id
     :name name
     :username username}))
@@ -27,5 +27,5 @@
           (without-fk-constraints tx
             (participant tx {:room_id "foobar"}) => (contains {:id string?}
                                                               {:room_id string?}
-                                                              {:name "Room group"}
+                                                              {:name "Foobar-participant"}
                                                               {:username "foobar"})))))))
