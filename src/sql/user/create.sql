@@ -1,2 +1,2 @@
-INSERT INTO users (username, full_name, password)
-VALUES ((:username)::text, (:full_name)::text, (:password)::text);
+INSERT INTO users (username, password)
+VALUES ((:username)::varchar(200), (:password)::text);

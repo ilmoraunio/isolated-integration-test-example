@@ -9,25 +9,14 @@
 
 
 (def user-data {:username "foobar"
-               :full_name "Foo Bar"
-               :password "hunter2"})
+                :password "hunter2"})
 
-(def user-data-expected (contains {:id integer?} 
-                                 {:username "foobar"}
-                                 {:full_name "Foo Bar"}
-                                 {:password "hunter2"}
-                                 {:created #(instance? java.util.Date %)}
-                                 {:updated #(instance? java.util.Date %)}
-                                 {:version 0}
-                                 {:deleted false}))
+(def user-data-expected (contains {:username "foobar"}
+                                  {:password "hunter2"}))
 
 (defn user
-  ([] (let [data user-data]
-        (model/create! db-spec data)))
-
-  ([{username :username :as input}]
-      (let [data (assoc user-data :username username)]
-        (model/create! db-spec data))))
+  ([] (let [data user-data] (user db-spec data)))
+  ([tx data] (model/create! tx data)))
 
 (deftest user-test
   (facts "User insertion"

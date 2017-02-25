@@ -9,20 +9,16 @@
             [clojure.java.jdbc :as jdbc]))
 
 (defn participant-data
-  ([{:keys [room_id name users_id]
-     :or {name "Room group" users_id 1}}]
+  ([{:keys [room_id name username]
+     :or {name "Room group" username "foobar"}}]
    {:room_id room_id
     :name name
-    :users_id users_id}))
+    :username username}))
 
-(def participant-expected (contains {:id integer?}
-                                  {:room_id integer?}
-                                  {:name "Room group"}
-                                  {:users_id 1}
-                                  {:created #(instance? java.util.Date %)}
-                                  {:updated #(instance? java.util.Date %)}
-                                  {:version 0}
-                                  {:deleted false}))
+(def participant-expected (contains {:id string?}
+                                    {:room_id string?}
+                                    {:name "Room group"}
+                                    {:username "foobar"}))
 
 (defn participant
   ([input] (participant db-spec input))
@@ -34,4 +30,4 @@
       (fact
         (jdbc/with-db-transaction [tx db-spec]
           (without-fk-constraints tx
-            (participant tx {:room_id 1}) => participant-expected))))))
+            (participant tx {:room_id "foobar"}) => participant-expected))))))

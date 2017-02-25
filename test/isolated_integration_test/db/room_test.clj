@@ -8,17 +8,12 @@
 
 (def room-data {:name "Pigeon room"})
 
-(def room-expected (contains {:id integer?}
-                             {:name "Pigeon room"}
-                             {:created #(instance? java.util.Date %)}
-                             {:updated #(instance? java.util.Date %)}
-                             {:version 0}
-                             {:deleted false}))
+(def room-expected (contains {:id string?}
+                             {:name "Pigeon room"}))
 
 (defn room
-  ([] (let [data room-data]
-        (room data)))
-  ([data] (model/create! db-spec data)))
+  ([] (let [data room-data] (room db-spec data)))
+  ([tx data] (model/create! tx data)))
 
 (deftest room-test
   (facts "Room insertion"
