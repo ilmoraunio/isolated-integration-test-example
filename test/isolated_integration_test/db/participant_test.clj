@@ -27,7 +27,7 @@
 (deftest participant-db
   (facts "Participant insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
-      (fact
+      (fact "Succeeds"
         (jdbc/with-db-transaction [tx db-spec]
           (without-fk-constraints tx
             (participant tx {:room_id "foobar"}) => participant-expected))))))

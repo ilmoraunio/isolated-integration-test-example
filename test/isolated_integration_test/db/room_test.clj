@@ -19,5 +19,6 @@
 (deftest room-db
   (facts "Room insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
-      (fact
-        (room) => room-expected))))
+      (fact "Succeeds"
+        (jdbc/with-db-transaction [tx db-spec]
+          (room) => room-expected)))))
