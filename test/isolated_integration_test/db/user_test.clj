@@ -19,5 +19,6 @@
   (facts "User insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact
-        (user) => (contains {:username "foobar"}
-                            {:password "hunter2"})))))
+        (jdbc/with-db-transaction [tx db-spec]
+          (user) => (contains {:username "foobar"}
+                              {:password "hunter2"}))))))
