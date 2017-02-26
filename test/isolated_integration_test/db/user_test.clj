@@ -12,7 +12,8 @@
 
 (defn user
   ([] (let [data user-data] (user db-spec data)))
-  ([tx data] (jdbc/with-db-transaction [tx tx] (model/create! tx data))))
+  ([db-spec data] (jdbc/with-db-transaction [tx db-spec]
+                    (model/create! tx data))))
 
 (deftest user-db
   (facts "User insertion"

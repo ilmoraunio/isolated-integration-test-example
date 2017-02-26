@@ -1,3 +1,5 @@
-(ns isolated-integration-test.db.model)
+(ns isolated-integration-test.db.model
+  (:require [schema.core :as s]))
 
-(def Model {:id String})
+(def id-pattern? #".{8}-.{4}-.{4}-.{4}-.{12}")
+(def Model {:id (s/pred #(re-matches id-pattern? %))})

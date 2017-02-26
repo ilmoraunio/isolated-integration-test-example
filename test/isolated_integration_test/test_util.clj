@@ -5,7 +5,8 @@
             [isolated-integration-test.conf.config :refer [db-spec]]
             [isolated-integration-test.conf.migrations :as migrations]
             [environ.core :refer [env]]
-            [clojure.java.jdbc :as jdbc]))
+            [clojure.java.jdbc :as jdbc]
+            [schema.core :as s]))
 
 (defn- empty-all-tables [conn]
   (if-let [table-name-count (count (get-table-names-without-meta))]
