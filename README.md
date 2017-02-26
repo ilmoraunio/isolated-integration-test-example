@@ -17,6 +17,8 @@ Prerequisites:
 - postgresql superuser `isolated-integration-test` with same password
 - install `postgresql-contrib` matching your current postgres version as dependency
 
+Pure SQL example found inside `resources/migrations/005-Message-insert-example.edn`
+
 ## License
 
 Copyright © Solita

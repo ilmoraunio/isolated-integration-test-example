@@ -1,0 +1,4 @@
+{:up ["SET session_replication_role = 'replica';
+       INSERT INTO Message (Room_id, sender, recipient, message) VALUES ('ebe1b9be-f7a7-11e6-a440-573a04afc920', 'f480dd34-f7a7-11e6-a440-0f01535615fc', 'f9086be2-f7a7-11e6-a440-13d4ffe62295', 'hello world!');
+       SET session_replication_role = DEFAULT;"]
+ :down [""]}
