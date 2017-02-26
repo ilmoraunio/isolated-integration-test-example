@@ -14,7 +14,7 @@
 (defn message
   ([tx input] (model/create! tx input)))
 
-(deftest message-db
+(fact-group :integration
   (facts "Message insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact "Succeeds"
@@ -35,8 +35,12 @@
                                                                       {:room_id id-pattern?}
                                                                       {:sender id-pattern?}
                                                                       {:recipient id-pattern?}
-                                                                      {:message string?}))))
-      (fact "Succeeds (isolated)"
+                                                                      {:message string?})))))))
+
+(fact-group :integration :integration-isolated
+  (facts "Message insertion (isolated)"
+    (with-state-changes [(before :facts (empty-and-create-tables))]
+      (fact "Succeeds"
         (jdbc/with-db-transaction [tx db-spec]
           (without-fk-constraints tx
             (let [room_id "ebe1b9be-f7a7-11e6-a440-573a04afc920"

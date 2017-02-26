@@ -4,11 +4,13 @@ Demonstrates the usage of `session_replication_role` in integration tests throug
 
 ## Usage
 
-Run tests with:
+To run tests:
 
-`lein test` or `lein midje`
-
-Isolated integration test can be found inside `test/isolated_integration_test/db/message_test.clj`
+```
+lein midje :print-facts
+lein midje :print-facts :filter integration
+lein midje :print-facts :filter integration-isolated
+```
 
 Prerequisites:
 

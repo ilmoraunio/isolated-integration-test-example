@@ -13,7 +13,7 @@
   ([tx] (room tx room-data))
   ([tx data] (model/create! tx data)))
 
-(deftest room-db
+(fact-group :integration
   (facts "Room insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact "Succeeds"

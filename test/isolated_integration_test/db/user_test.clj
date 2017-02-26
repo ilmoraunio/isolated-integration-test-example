@@ -14,7 +14,7 @@
   ([tx] (user tx user-data))
   ([tx data] (model/create! tx data)))
 
-(deftest user-db
+(fact-group :integration
   (facts "User insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact

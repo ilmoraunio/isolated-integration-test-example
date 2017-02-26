@@ -23,7 +23,7 @@
 
 (def room_id "ebe1b9be-f7a7-11e6-a440-573a04afc920")
 
-(deftest participant-db
+(fact-group :integration
   (facts "Participant insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact "Succeeds"
@@ -31,10 +31,14 @@
           (let [ _                   (user tx)
                 {room_id :id}        (room tx)]
             (participant tx {:room_id room_id}) => (contains {:id id-pattern?}
-                                                             {:room_id room_id}
-                                                             {:name "Foobar-participant"}
-                                                             {:username "foobar"}))))
-      (fact "Succeeds (isolated)"
+                                                     {:room_id room_id}
+                                                     {:name "Foobar-participant"}
+                                                     {:username "foobar"})))))))
+
+(fact-group :integration :integration-isolated
+  (facts "Participant insertion (isolated)"
+    (with-state-changes [(before :facts (empty-and-create-tables))]
+      (fact "Succeeds"
         (jdbc/with-db-transaction [tx db-spec]
           (without-fk-constraints tx
             (participant tx {:room_id room_id}) => (contains {:id id-pattern?}
