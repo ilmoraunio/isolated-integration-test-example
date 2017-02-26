@@ -7,8 +7,6 @@
             [clojure.java.jdbc :as jdbc]))
 
 (def room-data {:name "Some room name"})
-(def room-expected (contains {:id string?}
-                             {:name "Some room name"}))
 
 (defn room
   ([] (let [data room-data] (room db-spec data)))
@@ -19,4 +17,5 @@
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact "Succeeds"
         (jdbc/with-db-transaction [tx db-spec]
-          (room) => room-expected)))))
+          (room) => (contains {:id string?}
+                              {:name "Some room name"}))))))

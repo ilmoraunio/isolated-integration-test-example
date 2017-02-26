@@ -13,6 +13,10 @@
 (defn message
   ([tx input] (model/create! tx input)))
 
+(def room_id "ebe1b9be-f7a7-11e6-a440-573a04afc920")
+(def sender "f480dd34-f7a7-11e6-a440-0f01535615fc")
+(def recipient "f9086be2-f7a7-11e6-a440-13d4ffe62295")
+
 (deftest message-db
   (facts "Message insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
@@ -38,11 +42,11 @@
       (fact "Succeeds (isolated)"
         (jdbc/with-db-transaction [tx db-spec]
           (without-fk-constraints tx
-            (model/create! tx {:room_id "ebe1b9be-f7a7-11e6-a440-573a04afc920"
-                               :sender "f480dd34-f7a7-11e6-a440-0f01535615fc"
-                               :recipient "f9086be2-f7a7-11e6-a440-13d4ffe62295"
+            (model/create! tx {:room_id room_id
+                               :sender sender
+                               :recipient recipient
                                :message "hello world!"}) => (contains {:id string?}
-                                                                      {:room_id string?}
-                                                                      {:sender string?}
-                                                                      {:recipient string?}
-                                                                      {:message string?})))))))
+                                                                      {:room_id room_id}
+                                                                      {:sender sender}
+                                                                      {:recipient recipient}
+                                                                      {:message "hello world!"})))))))

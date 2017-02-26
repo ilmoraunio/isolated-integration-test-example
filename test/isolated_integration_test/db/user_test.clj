@@ -10,9 +10,6 @@
 (def user-data {:username "foobar"
                 :password "hunter2"})
 
-(def user-data-expected (contains {:username "foobar"}
-                                  {:password "hunter2"}))
-
 (defn user
   ([] (let [data user-data] (user db-spec data)))
   ([tx data] (jdbc/with-db-transaction [tx tx] (model/create! tx data))))
@@ -21,4 +18,5 @@
   (facts "User insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact
-        (user) => user-data-expected))))
+        (user) => (contains {:username "foobar"}
+                            {:password "hunter2"})))))
