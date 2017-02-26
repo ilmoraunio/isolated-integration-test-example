@@ -18,9 +18,8 @@
     :username username}))
 
 (defn participant
-  ([] (participant db-spec participant-data))
-  ([db-spec input] (jdbc/with-db-transaction [tx db-spec]
-                     (model/create! tx (participant-data input)))))
+  ([tx] (participant tx participant-data))
+  ([tx input] (model/create! tx (participant-data input))))
 
 (def room_id "ebe1b9be-f7a7-11e6-a440-573a04afc920")
 
@@ -29,8 +28,8 @@
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact "Succeeds"
         (jdbc/with-db-transaction [tx db-spec]
-          (let [ _                   (user)
-                {room_id :id}        (room)]
+          (let [ _                   (user tx)
+                {room_id :id}        (room tx)]
             (participant tx {:room_id room_id}) => (contains {:id id-pattern?}
                                                              {:room_id room_id}
                                                              {:name "Foobar-participant"}

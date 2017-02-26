@@ -11,14 +11,13 @@
                 :password "hunter2"})
 
 (defn user
-  ([] (let [data user-data] (user db-spec data)))
-  ([db-spec data] (jdbc/with-db-transaction [tx db-spec]
-                    (model/create! tx data))))
+  ([tx] (user tx user-data))
+  ([tx data] (model/create! tx data)))
 
 (deftest user-db
   (facts "User insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact
         (jdbc/with-db-transaction [tx db-spec]
-          (user) => (contains {:username "foobar"}
-                              {:password "hunter2"}))))))
+          (user tx) => (contains {:username "foobar"}
+                                 {:password "hunter2"}))))))

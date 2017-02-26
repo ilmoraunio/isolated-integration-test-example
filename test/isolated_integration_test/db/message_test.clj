@@ -12,8 +12,7 @@
             [clojure.java.jdbc :as jdbc]))
 
 (defn message
-  ([db-spec input] (jdbc/with-db-transaction [tx db-spec]
-                     (model/create! tx input))))
+  ([tx input] (model/create! tx input)))
 
 (deftest message-db
   (facts "Message insertion"
@@ -22,7 +21,7 @@
         (jdbc/with-db-transaction [tx db-spec]
           (let [{user_id1 :username}   (user tx {:username "foo" :password "hunter2"})
                 {user_id2 :username}   (user tx {:username "bar" :password "hunter2"})
-                {room_id :id}          (room)
+                {room_id :id}          (room tx)
                 {participant_id1 :id}  (participant tx {:name "foo"
                                                         :username user_id1
                                                         :room_id room_id})
