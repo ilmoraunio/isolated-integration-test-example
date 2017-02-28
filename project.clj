@@ -11,8 +11,8 @@
   :plugins       [[lein-environ "0.4.0"]]
   :eval-in :nrepl
   :profiles {:dev [:project/dev :profiles/dev]
-             :project/dev {:dependencies [[midje "1.6.3"]]
-                           :plugins [[lein-midje "3.1.3"]]
+             :project/dev {:dependencies [[midje "1.7.0"]]
+                           :plugins [[lein-midje "3.2.1"]]
                            ;;when :nrepl-port is set the application starts the nREPL server on load
                            :env {:dev true
                                  :port 3000
