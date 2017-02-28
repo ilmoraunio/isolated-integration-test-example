@@ -36,7 +36,7 @@
                                                               {:recipient id-pattern?}
                                                               {:message string?}))))))
 
-(fact-group :integration :integration-isolated
+(fact-group :integration-isolated
   (facts "Message insertion (isolated)"
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact "Succeeds"
