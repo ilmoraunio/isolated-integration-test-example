@@ -11,13 +11,12 @@
                 :password "hunter2"})
 
 (defn user
-  ([tx] (user tx user-data))
-  ([tx data] (model/create! tx data)))
+  ([db-spec] (user db-spec user-data))
+  ([db-spec data] (jdbc/with-db-transaction [tx db-spec] (model/create! tx data))))
 
 (fact-group :integration
   (facts "User insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact
-        (jdbc/with-db-transaction [tx db-spec]
-          (user tx) => (contains {:username "foobar"}
-                                 {:password "hunter2"}))))))
+        (user db-spec) => (contains {:username "foobar"}
+                                    {:password "hunter2"})))))

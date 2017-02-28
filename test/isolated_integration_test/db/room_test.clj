@@ -10,13 +10,12 @@
 (def room-data {:name "Some room name"})
 
 (defn room
-  ([tx] (room tx room-data))
-  ([tx data] (model/create! tx data)))
+  ([db-spec] (room db-spec room-data))
+  ([db-spec data] (jdbc/with-db-transaction [tx db-spec] (model/create! tx data))))
 
 (fact-group :integration
   (facts "Room insertion"
     (with-state-changes [(before :facts (empty-and-create-tables))]
       (fact "Succeeds"
-        (jdbc/with-db-transaction [tx db-spec]
-          (room tx) => (contains {:id id-pattern?}
-                                 {:name "Some room name"}))))))
+        (room db-spec) => (contains {:id id-pattern?}
+                                    {:name "Some room name"})))))
