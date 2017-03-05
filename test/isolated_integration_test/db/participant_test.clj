@@ -23,24 +23,26 @@
 
 (def room_id "ebe1b9be-f7a7-11e6-a440-573a04afc920")
 
-(fact-group :integration
-  (facts "Participant insertion"
-    (with-state-changes [(before :facts (empty-and-create-tables))]
-      (fact "Succeeds"
+(deftest participant-test
+  (fact-group :integration
+    (facts "Participant insertion"
+      (with-state-changes [(before :facts (empty-and-create-tables))]
+        (fact "Succeeds"
           (let [ _                   (user db-spec)
                 {room_id :id}        (room db-spec)]
             (participant db-spec {:room_id room_id}) => (contains {:id id-pattern?}
-                                                     {:room_id room_id}
-                                                     {:name "Foobar-participant"}
-                                                     {:username "foobar"}))))))
+                                                          {:room_id room_id}
+                                                          {:name "Foobar-participant"}
+                                                          {:username "foobar"})))))))
 
-(fact-group :integration-isolated
-  (facts "Participant insertion (isolated)"
-    (with-state-changes [(before :facts (empty-and-create-tables))]
-      (fact "Succeeds"
-        (jdbc/with-db-transaction [tx db-spec]
-          (without-fk-constraints tx
-            (participant tx {:room_id room_id}) => (contains {:id id-pattern?}
-                                                             {:room_id room_id}
-                                                             {:name "Foobar-participant"}
-                                                             {:username "foobar"})))))))
+(deftest participant-test-isolated
+  (fact-group :integration-isolated
+    (facts "Participant insertion (isolated)"
+      (with-state-changes [(before :facts (empty-and-create-tables))]
+        (fact "Succeeds"
+          (jdbc/with-db-transaction [tx db-spec]
+            (without-fk-constraints tx
+              (participant tx {:room_id room_id}) => (contains {:id id-pattern?}
+                                                               {:room_id room_id}
+                                                               {:name "Foobar-participant"}
+                                                               {:username "foobar"}))))))))

@@ -14,9 +14,10 @@
   ([db-spec] (user db-spec user-data))
   ([db-spec data] (jdbc/with-db-transaction [tx db-spec] (model/create! tx data))))
 
-(fact-group :integration
-  (facts "User insertion"
-    (with-state-changes [(before :facts (empty-and-create-tables))]
-      (fact
-        (user db-spec) => (contains {:username "foobar"}
-                                    {:password "hunter2"})))))
+(deftest user-test
+  (fact-group :integration :integration-isolated
+    (facts "User insertion"
+      (with-state-changes [(before :facts (empty-and-create-tables))]
+        (fact "Succeeds"
+          (user db-spec) => (contains {:username "foobar"}
+                                      {:password "hunter2"}))))))

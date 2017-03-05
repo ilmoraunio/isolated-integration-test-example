@@ -13,9 +13,10 @@
   ([db-spec] (room db-spec room-data))
   ([db-spec data] (jdbc/with-db-transaction [tx db-spec] (model/create! tx data))))
 
-(fact-group :integration
-  (facts "Room insertion"
-    (with-state-changes [(before :facts (empty-and-create-tables))]
-      (fact "Succeeds"
-        (room db-spec) => (contains {:id id-pattern?}
-                                    {:name "Some room name"})))))
+(deftest room-test
+  (fact-group :integration :integration-isolated
+    (facts "Room insertion"
+      (with-state-changes [(before :facts (empty-and-create-tables))]
+        (fact "Succeeds"
+          (room db-spec) => (contains {:id id-pattern?}
+                                      {:name "Some room name"}))))))
