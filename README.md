@@ -38,7 +38,7 @@ lein midje :filter integration
 lein midje :filter integration-isolated
 ```
 
-Noticeably, tests run with`integration-isolated` metadata provide less noise.
+Noticeably, tests run with `integration-isolated` metadata provide less noise.
 
 It's only by changing the validation schema that this problem disappears.
 
