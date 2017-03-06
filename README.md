@@ -21,7 +21,7 @@ Pure SQL example found inside `resources/migrations/005-Message-insert-example.e
 
 #### Example
 
-A naive introducible problem is to add a field with default value to `Users` and check the report with `lein midje` using the fact-group metadata.
+A naive introducible problem is to add a field with default value to `Users` and check the report with `lein midje` using profile metadata.
 
 ```sql
 ALTER TABLE Users ADD COLUMN foo TEXT NOT NULL DEFAULT 'bar';
