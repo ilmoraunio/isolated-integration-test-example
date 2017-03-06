@@ -1,6 +1,6 @@
 # Isolated integration test example
 
-Demonstrates the usage of `session_replication_role` in integration tests through simple examples.
+Demonstrates the usage of `session_replication_role` in integration tests through a simple example.
 
 ## Usage
 
